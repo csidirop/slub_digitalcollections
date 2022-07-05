@@ -28,7 +28,7 @@
   "license": "GPL-3.0-or-later",
   "require": {
     "typo3/cms-core": "~9.5|^10.4",
-    "csidirop/presentation": "dev-3.3.x-ocr-test"
+    "csidirop/presentation": "dev-3.3.x-ocr"
   },
   "autoload": {
     "psr-4": {
