@@ -30,17 +30,26 @@ $(function () {
 
     // menu toggles for offcanvas toc and metadata
     $('.offcanvas-toggle').on('click', function (event) {
+        // close nav on link or download if opened
+        close_all_submenus();
+
         $(this).parent().toggleClass('open');
     });
 
     // active toggle for submenus
     $('li.submenu > a').on('click', function (event) {
+        // close secondary nav if click on link or download
+        $('nav .secondary-nav').removeClass('open');
+
         $('li.submenu.open a').not(this).parent().removeClass('open');
         $(this).parent().toggleClass('open');
     });
 
     // secondary nav toggle
     $('nav .nav-toggle').on('click', function (event) {
+        // close nav on link or download if opened
+        close_all_submenus('in-secondary-nav');
+
         $(this).toggleClass('active');
         $('nav .secondary-nav').toggleClass('open');
     });
@@ -131,6 +140,7 @@ $(function () {
 
     // enable click on fullscreen button
     $('a.fullscreen').on('click', function () {
+        close_all_submenus();
         window.DigitalCollections.toggleTheaterMode();
     });
 
@@ -155,6 +165,7 @@ $(function () {
     // Toggle and setup for the 'in document search'
     if ($('.tx-dlf-toolsFulltextsearch form')[0]) {
         $('.fulltext-search-toggle').on('click', function () { // selector should be semantically: .search-indocument-toggle
+            close_all_submenus();
             $('body').toggleClass('search-indocument-active');
             $('.tx-dlf-toolsFulltextsearch').css({top: ($(this).offset().top - 60) + 'px'});
             $('body.search-indocument-active #tx-dlf-search-in-document-query').trigger('focus');
@@ -220,6 +231,17 @@ $(function () {
         $('body').removeClass('static');
     }, 1000);
 
+    // Closing open menus in different situations
+    $('.tx-dlf-tools-imagetools').on('click', function (event) {
+        close_all_submenus();
+    });
+    $('.page-control').on('click', function (event) {
+        close_all_submenus();
+    });
+    $('.tx-dlf-map').on('click', function (event) {
+        close_all_submenus();
+    });
+
 });
 
 $(document).keyup(function (e) {
@@ -284,3 +306,15 @@ window.addEventListener('dlf-theater-mode', (e) => {
             break;
     }
 });
+
+function close_all_submenus(environment = '') {
+    // close nav on link or download if opened
+    $('li.submenu.open a').parent().removeClass('open');
+    if (environment != 'in-secondary-nav') {
+        // close subnav if opend
+        $('nav .nav-toggle').removeClass('active');
+        $('nav .secondary-nav').removeClass('open');
+    };
+}
+
+// EOF
