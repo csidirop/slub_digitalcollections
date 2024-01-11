@@ -28,7 +28,7 @@
   "license": "GPL-3.0-or-later",
   "require": {
     "typo3/cms-core": "~9.5|^10.4",
-    "ub-mannheim/presentation": "dev-4.x-ocr-dev"
+    "ub-mannheim/presentation": "dev-4.x-ocr-devel"
   },
   "autoload": {
     "psr-4": {
